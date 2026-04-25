@@ -1,5 +1,5 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { ArrowLeft, Copy, MessageCircle } from "lucide-react";
+import { ArrowLeft, Copy, ExternalLink, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import SiteHeader from "@/components/SiteHeader";
@@ -36,6 +36,7 @@ const Payment = () => {
           subtitle: "Send the consultation fee using the QR code or UPI ID below.",
           feeLabel: "Consultation fee",
           copyCta: "Copy UPI ID",
+          openUpiCta: "Open UPI app",
           finalTitle: "Final step",
           finalDesc:
             "After payment is complete, use the button below to send your details on WhatsApp. The doctor will share the consultation time soon.",
@@ -69,6 +70,7 @@ const Payment = () => {
           subtitle: "कृपया नीचे दिए QR कोड या UPI ID से परामर्श शुल्क भेजें।",
           feeLabel: "परामर्श शुल्क",
           copyCta: "UPI ID कॉपी करें",
+          openUpiCta: "UPI ऐप खोलें",
           finalTitle: "अंतिम चरण",
           finalDesc:
             "भुगतान पूरा होने के बाद, नीचे दिए बटन से अपना विवरण WhatsApp पर भेजें। डॉक्टर शीघ्र ही समय बताएंगे।",
@@ -132,6 +134,10 @@ const Payment = () => {
     toast.success(t.toast.opening);
   };
 
+  const onOpenUpi = () => {
+    window.location.href = CLINIC.upiPaymentLink;
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -154,15 +160,27 @@ const Payment = () => {
             </div>
 
             <div className="mt-6 flex flex-col items-center gap-4 rounded-xl border border-border bg-background p-6">
-              <img src={upiQr} alt="UPI QR" width={220} height={220} className="rounded-lg border border-border" loading="lazy" />
+              <button
+                type="button"
+                onClick={onOpenUpi}
+                className="rounded-lg border border-border transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Open UPI app"
+              >
+                <img src={upiQr} alt="UPI QR" width={220} height={220} className="rounded-lg" loading="lazy" />
+              </button>
               <div className="text-center">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">UPI ID</p>
                 <p className="mt-1 font-mono text-base text-primary">{CLINIC.upiId}</p>
                 <p className="text-xs text-muted-foreground">{CLINIC.upiName}</p>
               </div>
-              <Button variant="outline" size="sm" onClick={copyUpi}>
-                <Copy className="h-4 w-4" /> {t.copyCta}
-              </Button>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <Button variant="outline" size="sm" onClick={copyUpi}>
+                  <Copy className="h-4 w-4" /> {t.copyCta}
+                </Button>
+                <Button variant="outline" size="sm" onClick={onOpenUpi}>
+                  <ExternalLink className="h-4 w-4" /> {t.openUpiCta}
+                </Button>
+              </div>
             </div>
           </div>
 

@@ -6,6 +6,7 @@ export const CLINIC = {
   whatsappNumber: "919079923020", // country code, no +
   upiId: "prof.maheshdixit@okhdfcbank",
   upiName: "Dr. Mahesh Dixit",
+  upiPaymentLink: "upi://pay?pa=prof.maheshdixit@okhdfcbank&pn=Mahesh%20Dixit&aid=uGICAgKCSlqD5dQ",
   consultationFee: 500,
   email: "prof.maheshdixit@gmail.com",
   social: {
