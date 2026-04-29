@@ -8,6 +8,8 @@ import upiQr from "@/assets/upi-qr.png";
 import { CLINIC, buildWhatsAppLink } from "@/lib/clinic";
 import type { ConsultDetails } from "./Consultation";
 import { useLanguage } from "@/lib/i18n";
+import SeoHead from "@/components/SeoHead";
+import { getContentByLang } from "@/lib/clinic";
 
 function formatSentAt(d: Date, locale: string) {
   const date = new Intl.DateTimeFormat(locale, {
@@ -27,6 +29,7 @@ const Payment = () => {
   const location = useLocation();
   const data = location.state as ConsultDetails | null;
   const { lang } = useLanguage();
+  const content = getContentByLang(lang);
 
   const t =
     lang === "en"
@@ -58,11 +61,14 @@ const Payment = () => {
             city: (v: string) => `City: ${v}`,
             concern: (v: string) => `Concern: ${v}`,
             preferredTime: (v: string) => `Preferred slot (AM/PM): ${v}`,
+            reportLink: (v: string) => `Reports: ${v}`,
+            consultMode: (v: string) => `Consultation mode: ${v}`,
+            followUp: (v: string) => `Follow-up: ${v}`,
             paid: (upiId: string) => `Payment: ₹${CLINIC.consultationFee} (UPI: ${upiId})`,
             sentAt: (v: string) => `Sent on: ${v}`,
             ask: "Kindly share the available consultation time. Thank you.",
           },
-          row: { name: "Name", age: "Age", phone: "Phone", city: "City", concern: "Concern", time: "Preferred time" },
+          row: { name: "Name", age: "Age", phone: "Phone", city: "City", concern: "Concern", time: "Preferred time", report: "Report link", mode: "Consult mode", follow: "Follow-up" },
         }
       : {
           back: "विवरण में वापस जाएँ",
@@ -92,11 +98,14 @@ const Payment = () => {
             city: (v: string) => `शहर: ${v}`,
             concern: (v: string) => `समस्या: ${v}`,
             preferredTime: (v: string) => `पसंदीदा समय (AM/PM): ${v}`,
+            reportLink: (v: string) => `रिपोर्ट: ${v}`,
+            consultMode: (v: string) => `परामर्श माध्यम: ${v}`,
+            followUp: (v: string) => `फॉलो-अप: ${v}`,
             paid: (upiId: string) => `भुगतान: ₹${CLINIC.consultationFee} (UPI: ${upiId})`,
             sentAt: (v: string) => `भेजने का समय: ${v}`,
             ask: "कृपया उपलब्ध परामर्श समय बताएं। धन्यवाद।",
           },
-          row: { name: "नाम", age: "उम्र", phone: "फ़ोन", city: "शहर", concern: "समस्या", time: "पसंदीदा समय" },
+          row: { name: "नाम", age: "उम्र", phone: "फ़ोन", city: "शहर", concern: "समस्या", time: "पसंदीदा समय", report: "रिपोर्ट लिंक", mode: "परामर्श माध्यम", follow: "फॉलो-अप" },
         };
 
   if (!data || !data.name) {
@@ -123,6 +132,9 @@ const Payment = () => {
     data.city ? `• ${t.msg.city(data.city)}` : "",
     `• ${t.msg.concern(data.concern)}`,
     data.preferredTime ? `• ${t.msg.preferredTime(data.preferredTime)}` : "",
+    data.reportLink ? `• ${t.msg.reportLink(data.reportLink)}` : "",
+    data.consultMode ? `• ${t.msg.consultMode(data.consultMode)}` : "",
+    data.followUp ? `• ${t.msg.followUp(data.followUp)}` : "",
     ``,
     t.msg.paid(CLINIC.upiId),
     t.msg.sentAt(formatSentAt(new Date(), lang === "en" ? "en-IN" : "hi-IN")),
@@ -140,6 +152,11 @@ const Payment = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SeoHead
+        title={lang === "en" ? "Payment | Ayurvedic Consultation" : "भुगतान | आयुर्वेदिक परामर्श"}
+        description={content.brandMessage}
+        keywords={content.seo.keywords.join(", ")}
+      />
       <SiteHeader />
 
       <section className="container py-10 md:py-16">
@@ -205,6 +222,9 @@ const Payment = () => {
                 {data.city && <Row k={t.row.city} v={data.city} />}
                 <Row k={t.row.concern} v={data.concern} />
                 {data.preferredTime && <Row k={t.row.time} v={data.preferredTime} />}
+                {data.reportLink && <Row k={t.row.report} v={data.reportLink} />}
+                {data.consultMode && <Row k={t.row.mode} v={data.consultMode} />}
+                {data.followUp && <Row k={t.row.follow} v={data.followUp} />}
               </dl>
             </div>
 

@@ -1,29 +1,34 @@
 import { Facebook, Instagram, Youtube, Mail, Leaf } from "lucide-react";
+import { Link } from "react-router-dom";
 import { CLINIC } from "@/lib/clinic";
 import { useLanguage } from "@/lib/i18n";
+import { getContentByLang } from "@/lib/clinic";
 
 const SiteFooter = () => {
   const { lang } = useLanguage();
+  const content = getContentByLang(lang);
   const t =
     lang === "en"
       ? {
-          blurb: "A blend of classical Ayurveda and modern understanding — simple, safe guidance for your health.",
+          blurb: content.brandMessage,
           contact: "Contact",
+          quick: "Quick links",
           social: "Social",
           rights: "All rights reserved.",
-          disclaimer: "⚠️ This service is not for medical emergencies.",
+          disclaimer: `⚠️ ${content.disclaimer}`,
         }
       : {
-          blurb: "पारंपरिक आयुर्वेद और आधुनिक समझ के साथ — आपकी सेहत के लिए सरल, सुरक्षित मार्गदर्शन।",
+          blurb: content.brandMessage,
           contact: "संपर्क",
+          quick: "त्वरित लिंक",
           social: "सोशल",
           rights: "सर्वाधिकार सुरक्षित।",
-          disclaimer: "⚠️ यह सेवा आपातकालीन चिकित्सा के लिए नहीं है।",
+          disclaimer: `⚠️ ${content.disclaimer}`,
         };
 
   return (
     <footer id="contact" className="border-t border-border bg-primary text-primary-foreground">
-      <div className="container grid gap-10 py-14 md:grid-cols-3">
+      <div className="container grid gap-10 py-14 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-primary-foreground/10">
@@ -34,6 +39,15 @@ const SiteFooter = () => {
           <p className="mt-3 text-sm text-primary-foreground/80">
             {t.blurb}
           </p>
+        </div>
+
+        <div>
+          <h4 className="font-serif text-lg">{t.quick}</h4>
+          <div className="mt-3 flex flex-col gap-1.5 text-sm">
+            <Link to="/about-doctor" className="text-primary-foreground/85 hover:text-primary-foreground">{content.pages.about}</Link>
+            <Link to="/diseases-treated" className="text-primary-foreground/85 hover:text-primary-foreground">{content.pages.diseases}</Link>
+            <Link to="/book-appointment" className="text-primary-foreground/85 hover:text-primary-foreground">{content.pages.book}</Link>
+          </div>
         </div>
 
         <div>

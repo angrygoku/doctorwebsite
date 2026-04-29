@@ -9,6 +9,11 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Consultation from "./pages/Consultation.tsx";
 import Payment from "./pages/Payment.tsx";
+import AboutDoctor from "./pages/AboutDoctor.tsx";
+import DiseasesTreated from "./pages/DiseasesTreated.tsx";
+import Testimonials from "./pages/Testimonials.tsx";
+import Contact from "./pages/Contact.tsx";
+import BookAppointment from "./pages/BookAppointment.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +27,12 @@ const App = () => (
           <ScrollToHash />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/about-doctor" element={<AboutDoctor />} />
+            <Route path="/diseases-treated" element={<DiseasesTreated />} />
             <Route path="/consultation" element={<Consultation />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/book-appointment" element={<BookAppointment />} />
             <Route path="/payment" element={<Payment />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

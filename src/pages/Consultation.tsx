@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { useLanguage } from "@/lib/i18n";
+import SeoHead from "@/components/SeoHead";
+import { getContentByLang } from "@/lib/clinic";
 
 export type ConsultDetails = {
   name: string;
@@ -18,6 +20,9 @@ export type ConsultDetails = {
   concern: string;
   preferredTime: string;
   source: string;
+  reportLink: string;
+  consultMode: string;
+  followUp: string;
 };
 
 const initial: ConsultDetails = {
@@ -28,12 +33,16 @@ const initial: ConsultDetails = {
   concern: "",
   preferredTime: "",
   source: "",
+  reportLink: "",
+  consultMode: "",
+  followUp: "",
 };
 
 const Consultation = () => {
   const [data, setData] = useState<ConsultDetails>(initial);
   const navigate = useNavigate();
   const { lang } = useLanguage();
+  const content = getContentByLang(lang);
 
   const t =
     lang === "en"
@@ -48,6 +57,9 @@ const Consultation = () => {
           concern: "Health concern *",
           preferredTime: "Preferred time",
           source: "How did you hear about us? (optional)",
+          reportLink: "Report upload link (optional)",
+          consultMode: "Preferred consultation mode",
+          followUp: "Follow-up preference",
           cta: "Continue — payment step",
           disclaimer: "⚠️ This service is not for medical emergencies.",
           expectTitle: "What to expect",
@@ -70,6 +82,9 @@ const Consultation = () => {
             concern: "Briefly describe your concern — since when, key symptoms, etc.",
             time: "e.g. 5–7 PM",
             source: "e.g. YouTube, friend",
+            report: "Google Drive / Dropbox link",
+            mode: "Video / Phone / WhatsApp call",
+            follow: "Weekly / Bi-weekly / Monthly",
           },
           toast: {
             missing: "Please fill name, phone, and health concern.",
@@ -87,6 +102,9 @@ const Consultation = () => {
           concern: "स्वास्थ्य समस्या *",
           preferredTime: "पसंदीदा समय",
           source: "हमारे बारे में कहाँ से जाना? (वैकल्पिक)",
+          reportLink: "रिपोर्ट अपलोड लिंक (वैकल्पिक)",
+          consultMode: "पसंदीदा परामर्श माध्यम",
+          followUp: "फॉलो-अप प्राथमिकता",
           cta: "आगे बढ़ें — भुगतान चरण",
           disclaimer: "⚠️ यह सेवा आपातकालीन चिकित्सा के लिए नहीं है।",
           expectTitle: "क्या अपेक्षा करें",
@@ -109,6 +127,9 @@ const Consultation = () => {
             concern: "अपनी समस्या संक्षेप में लिखें — कब से है, मुख्य लक्षण आदि।",
             time: "जैसे शाम 5–7 बजे",
             source: "जैसे YouTube, मित्र",
+            report: "Google Drive / Dropbox लिंक",
+            mode: "वीडियो / फोन / WhatsApp कॉल",
+            follow: "साप्ताहिक / पखवाड़ा / मासिक",
           },
           toast: {
             missing: "कृपया नाम, फ़ोन और स्वास्थ्य समस्या भरें।",
@@ -131,6 +152,11 @@ const Consultation = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SeoHead
+        title={lang === "en" ? "Book Consultation | Ayurveda Online" : "परामर्श बुक करें | आयुर्वेद ऑनलाइन"}
+        description={content.brandMessage}
+        keywords={content.seo.keywords.join(", ")}
+      />
       <SiteHeader />
 
       <section className="container py-10 md:py-16">
@@ -189,6 +215,22 @@ const Consultation = () => {
                   <Label htmlFor="source">{t.source}</Label>
                   <Input id="source" value={data.source} onChange={update("source")} placeholder={t.placeholders.source} />
                 </div>
+              </div>
+
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div className="grid gap-2">
+                  <Label htmlFor="reportLink">{t.reportLink}</Label>
+                  <Input id="reportLink" value={data.reportLink} onChange={update("reportLink")} placeholder={t.placeholders.report} />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="consultMode">{t.consultMode}</Label>
+                  <Input id="consultMode" value={data.consultMode} onChange={update("consultMode")} placeholder={t.placeholders.mode} />
+                </div>
+              </div>
+
+              <div className="grid gap-2">
+                <Label htmlFor="followUp">{t.followUp}</Label>
+                <Input id="followUp" value={data.followUp} onChange={update("followUp")} placeholder={t.placeholders.follow} />
               </div>
 
               <Button type="submit" size="lg" className="mt-2">

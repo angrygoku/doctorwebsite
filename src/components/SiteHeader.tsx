@@ -4,18 +4,20 @@ import { Menu, X, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CLINIC } from "@/lib/clinic";
 import { useLanguage } from "@/lib/i18n";
+import { getContentByLang } from "@/lib/clinic";
 
 const SiteHeader = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { lang, toggleLang } = useLanguage();
+  const content = getContentByLang(lang);
 
   const NAV = [
-    { href: "#about", label: lang === "en" ? "About" : "परिचय" },
-    { href: "#specialties", label: lang === "en" ? "Specialties" : "विशेषज्ञता" },
-    { href: "#how", label: lang === "en" ? "How it works" : "परामर्श कैसे लें" },
-    { href: "#faq", label: lang === "en" ? "FAQ" : "सामान्य प्रश्न" },
-    { href: "#contact", label: lang === "en" ? "Contact" : "संपर्क" },
+    { href: "/about-doctor", label: content.pages.about },
+    { href: "/diseases-treated", label: content.pages.diseases },
+    { href: "/consultation", label: content.pages.consultation },
+    { href: "/testimonials", label: content.pages.testimonials },
+    { href: "/contact", label: content.pages.contact },
   ];
 
   const goConsult = () => {
@@ -42,7 +44,7 @@ const SiteHeader = () => {
           {NAV.map((n) => (
             <Link
               key={n.href}
-              to={`/${n.href}`}
+              to={n.href}
               className="text-sm text-foreground/80 transition-colors hover:text-primary"
             >
               {n.label}
@@ -61,7 +63,7 @@ const SiteHeader = () => {
             {lang === "en" ? "हिं" : "ENG"}
           </Button>
           <Button onClick={goConsult} className="bg-primary text-primary-foreground hover:bg-primary/90">
-            {lang === "en" ? "Book consult" : "परामर्श बुक करें"}
+            {content.pages.book}
           </Button>
         </div>
 
@@ -80,7 +82,7 @@ const SiteHeader = () => {
             {NAV.map((n) => (
               <Link
                 key={n.href}
-                to={`/${n.href}`}
+                to={n.href}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-2 py-2 text-base text-foreground/85 hover:bg-secondary"
               >
@@ -92,7 +94,7 @@ const SiteHeader = () => {
                 {lang === "en" ? "हिं" : "ENG"}
               </Button>
               <Button onClick={goConsult}>
-                {lang === "en" ? "Book consult" : "परामर्श बुक करें"}
+                {content.pages.book}
               </Button>
             </div>
           </nav>
