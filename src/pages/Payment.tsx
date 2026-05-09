@@ -141,13 +141,9 @@ const Payment = () => {
     t.msg.ask,
   ].filter(Boolean).join("\n");
 
+  const whatsAppLink = buildWhatsAppLink(message);
   const onWhatsApp = () => {
-    window.open(buildWhatsAppLink(message), "_blank");
     toast.success(t.toast.opening);
-  };
-
-  const onOpenUpi = () => {
-    window.location.href = CLINIC.upiPaymentLink;
   };
 
   return (
@@ -177,14 +173,13 @@ const Payment = () => {
             </div>
 
             <div className="mt-6 flex flex-col items-center gap-4 rounded-xl border border-border bg-background p-6">
-              <button
-                type="button"
-                onClick={onOpenUpi}
+              <a
+                href={CLINIC.upiPaymentLink}
                 className="rounded-lg border border-border transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                aria-label="Open UPI app"
+                aria-label={t.openUpiCta}
               >
                 <img src={upiQr} alt="UPI QR" width={220} height={220} className="rounded-lg" loading="lazy" />
-              </button>
+              </a>
               <div className="text-center">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">UPI ID</p>
                 <p className="mt-1 font-mono text-base text-primary">{CLINIC.upiId}</p>
@@ -194,8 +189,10 @@ const Payment = () => {
                 <Button variant="outline" size="sm" onClick={copyUpi}>
                   <Copy className="h-4 w-4" /> {t.copyCta}
                 </Button>
-                <Button variant="outline" size="sm" onClick={onOpenUpi}>
-                  <ExternalLink className="h-4 w-4" /> {t.openUpiCta}
+                <Button variant="outline" size="sm" asChild>
+                  <a href={CLINIC.upiPaymentLink}>
+                    <ExternalLink className="h-4 w-4" /> {t.openUpiCta}
+                  </a>
                 </Button>
               </div>
             </div>
@@ -207,9 +204,15 @@ const Payment = () => {
               <p className="mt-2 text-sm text-muted-foreground">
                 {t.finalDesc}
               </p>
-              <Button size="lg" className="mt-4 w-full bg-primary text-primary-foreground hover:bg-primary/90" onClick={onWhatsApp}>
-                <MessageCircle className="h-5 w-5" />
-                {t.finalCta}
+              <Button
+                size="lg"
+                className="mt-4 w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                asChild
+              >
+                <a href={whatsAppLink} target="_blank" rel="noreferrer" onClick={onWhatsApp}>
+                  <MessageCircle className="h-5 w-5" />
+                  {t.finalCta}
+                </a>
               </Button>
             </div>
 
