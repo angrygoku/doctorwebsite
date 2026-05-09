@@ -14,6 +14,7 @@ const DiseasesTreated = () => {
         title={lang === "en" ? "Diseases Treated | Ayurvedic Specialities" : "रोग उपचार | आयुर्वेदिक विशेषज्ञता"}
         description={content.brandMessage}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
       <section className="container py-12 md:py-16">

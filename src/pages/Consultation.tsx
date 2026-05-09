@@ -156,6 +156,7 @@ const Consultation = () => {
         title={lang === "en" ? "Book Consultation | Ayurveda Online" : "परामर्श बुक करें | आयुर्वेद ऑनलाइन"}
         description={content.brandMessage}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
 

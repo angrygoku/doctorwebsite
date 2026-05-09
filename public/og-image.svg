@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="hero" x1="84" y1="48" x2="1132" y2="582" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2f6b57" />
+      <stop offset="1" stop-color="#6d8f3a" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#f6f0df" />
+  <rect x="44" y="44" width="1112" height="542" rx="36" fill="url(#hero)" />
+  <path d="M166 366c47-8 92-63 108-146 46 36 71 92 71 152 0 68-52 116-118 116-48 0-87-31-99-78z" fill="#f6f0df"/>
+  <path d="M270 226c-16 59-51 100-103 119 17 37 47 59 84 59 55 0 96-40 96-95 0-30-18-62-77-83z" fill="#fff" opacity="0.3"/>
+  <text x="430" y="255" fill="#f6f0df" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="600">Prof. (Vaidya) Mahesh Dixit</text>
+  <text x="430" y="330" fill="#f6f0df" font-family="Inter, Arial, sans-serif" font-size="82" font-weight="700">Dr Dixit Consultation</text>
+  <text x="430" y="402" fill="#f6f0df" font-family="Inter, Arial, sans-serif" font-size="34" opacity="0.92">Ayurvedic Online Consultation</text>
+  <text x="430" y="460" fill="#f6f0df" font-family="Inter, Arial, sans-serif" font-size="28" opacity="0.82">Classical Ayurveda - Scientific Trust - Personalized Guidance</text>
+</svg>

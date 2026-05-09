@@ -25,6 +25,7 @@ const Index = () => {
         title={lang === "en" ? "Ayurvedic Online Consultation | Prof. (Vaidya) Mahesh Dixit" : "प्रो. (वैद्य) महेश दीक्षित | आयुर्वेदिक ऑनलाइन परामर्श"}
         description={content.seo.description}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
 

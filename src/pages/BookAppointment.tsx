@@ -16,6 +16,7 @@ const BookAppointment = () => {
         title={lang === "en" ? "Book Appointment | Online Ayurveda Consultation" : "परामर्श बुक करें | ऑनलाइन आयुर्वेद"}
         description={content.brandMessage}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
       <section className="container py-12 md:py-16">

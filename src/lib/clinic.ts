@@ -20,6 +20,18 @@ export const CLINIC = {
   },
 };
 
+export const SITE_META = {
+  siteName: "Dr Dixit Consultation",
+  shortName: "DrDixit",
+  defaultTitle: "Dr Dixit Consultation | Ayurvedic Online Consultation",
+  defaultDescription:
+    "Consult Prof. (Vaidya) Mahesh Dixit for trusted Ayurvedic online consultation, chronic disease guidance, and personalized care plans.",
+  themeColor: "#2f6b57",
+  iconPath: "/favicon.svg",
+  ogImagePath: "/og-image.svg",
+  ogImageAlt: "Dr Dixit Consultation Ayurvedic online consultation branding",
+} as const;
+
 export const SITE_CONTENT = {
   en: {
     tagline: "Classical Ayurveda, Scientific Trust",

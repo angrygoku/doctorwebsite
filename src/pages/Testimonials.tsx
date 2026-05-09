@@ -15,6 +15,7 @@ const Testimonials = () => {
         title={lang === "en" ? "Testimonials | Patient Feedback" : "रोगी अनुभव | प्रशंसापत्र"}
         description={content.brandMessage}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
       <section className="container py-12 md:py-16">

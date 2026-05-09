@@ -14,6 +14,7 @@ const AboutDoctor = () => {
         title={lang === "en" ? "About Doctor | Prof. (Vaidya) Mahesh Dixit" : "डॉक्टर परिचय | प्रो. (वैद्य) महेश दीक्षित"}
         description={content.doctorBio.short}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
       <section className="container py-12 md:py-16">

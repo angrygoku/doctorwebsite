@@ -17,6 +17,7 @@ const Contact = () => {
         title={lang === "en" ? "Contact | Ayurvedic Online Consultation" : "संपर्क | आयुर्वेदिक ऑनलाइन परामर्श"}
         description={content.brandMessage}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
       <section className="container py-12 md:py-16">

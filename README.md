@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Dr Dixit Consultation Website
 
-TODO: Document your project here
+A Vite + React website for Dr Dixit's Ayurvedic online consultation practice.

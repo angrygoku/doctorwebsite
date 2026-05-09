@@ -152,6 +152,7 @@ const Payment = () => {
         title={lang === "en" ? "Payment | Ayurvedic Consultation" : "भुगतान | आयुर्वेदिक परामर्श"}
         description={content.brandMessage}
         keywords={content.seo.keywords.join(", ")}
+        lang={lang}
       />
       <SiteHeader />
 
