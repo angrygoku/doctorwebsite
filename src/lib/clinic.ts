@@ -9,7 +9,7 @@ export const CLINIC = {
   upiId: "prof.maheshdixit@okhdfcbank",
   upiName: "Mahesh Dixit",
   upiPaymentLink: "upi://pay?pa=prof.maheshdixit@okhdfcbank&pn=Mahesh%20Dixit&aid=uGICAgKCSlqD5dQ",
-  consultationFee: 500,
+  consultationFee: 200,
   email: "prof.maheshdixit@gmail.com",
   social: {
     facebook: "https://www.facebook.com/mahesh.dixit.1466",
